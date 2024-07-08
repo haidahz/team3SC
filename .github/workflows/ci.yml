@@ -20,10 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
       
     - name: Build the Docker image
-      run: docker build -t haidahz/cicd-pipeline:latest .
+      run: docker build -t xiang19999/cicd-pipeline:latest .
       
     - name: Push to Docker Hub
-      run: docker push haidahz/cicd-pipeline:latest
-
-    - name: Run JMeter Tests in Docker
-      run: docker run --rm haidahz/cicd-pipeline
+      run: docker push xiang19999/cicd-pipeline:latest
