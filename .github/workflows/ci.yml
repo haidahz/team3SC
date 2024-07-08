@@ -24,3 +24,14 @@ jobs:
       
     - name: Push to Docker Hub
       run: docker push haidahz/cicd-pipeline:latest
+
+    - name: Install BlazeMeter CLI
+      run: |
+        curl -o bzm https://get.blazemeter.com && \
+        chmod +x bzm && \
+        ./bzm install
+        
+    - name: Run BlazeMeter Tests
+      run: |
+        ./bzm login -a ${{ secrets.BLAZEMETER_API_KEY }}
+        ./bzm run your-blazemeter-test.yml
