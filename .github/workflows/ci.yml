@@ -1,4 +1,4 @@
-name: CI Docker Image 
+name: CI Docker Image with JMeter
 
 on:
   push:
@@ -25,13 +25,5 @@ jobs:
     - name: Push to Docker Hub
       run: docker push haidahz/cicd-pipeline:latest
 
-    - name: Install BlazeMeter CLI
-      run: |
-        curl -o bzm https://get.blazemeter.com && \
-        chmod +x bzm && \
-        ./bzm install
-        
-    - name: Run BlazeMeter Tests
-      run: |
-        ./bzm login -a ${{ secrets.BLAZEMETER_API_KEY }}
-        ./bzm run your-blazemeter-test.yml
+    - name: Run JMeter Tests in Docker
+      run: docker run --rm haidahz/cicd-pipeline
