@@ -1,0 +1,22 @@
+name: Docker Image CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Pull Docker image
+      run: sudo docker pull haidahz/cicd-pipleline:latest
+    - name: Delete Old docker container
+      run: docker rm -f cidi-pipeline-container || true
+    -name: Run Docker Container
+      run: docker run -d -p 8080:8080 --name cidi-pipeline-container haidahz/cicd-pipleline
+
